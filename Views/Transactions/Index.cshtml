@@ -1,0 +1,54 @@
+﻿@model List<Transaction>
+@{
+    ViewBag.Title = "Transactions";
+}
+
+<h3>@ViewBag.Title</h3>
+
+<a asp-controller="Transaction" asp-action="Add">Create New</a>
+
+<br /> <br />
+
+@if (TempData["transactionMessage"] != null)
+ {
+    <p class="alert alert-success alert-primary ">@TempData["transactionMessage"]</p>
+ }
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Ticker</th>
+            <th> @Html.ActionLink("CompanyName", "Index", new { sortOrder = ViewBag.NameSortParm }) </th>
+            <th>Quantity</th>
+            <th>Share Price</th>
+            <th>Gross Value</th>
+            <th>Net Value</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in Model)
+        {
+            <tr>
+                    <td>@transaction.Company.Ticker</td>
+                    <td>@transaction.Company.CompanyName</td>
+                    <td>@transaction.Quantity</td>
+                    <td>@transaction.SharePrice?.ToString("c2")</td>
+                    @if (@transaction.TransactionType.Name == "Buy")
+                    {
+                        <td>$(@transaction.Gross()?.ToString("0.00"))</td>
+                        <td>$(@transaction.Net()?.ToString("0.00"))</td>
+                    }
+                    else
+                    {
+                        <td>@transaction.Gross()?.ToString("c2")</td>
+                        <td>@transaction.Net()?.ToString("c2")</td>
+                    }
+                    <td>@transaction.TransactionType.Name</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+

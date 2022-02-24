@@ -1,0 +1,28 @@
+﻿@model Company
+@{
+
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<form asp-controller="Company" asp-action="Detail" method="Get">
+
+    <div class="form-group">
+        <label asp-for="CompanyName">Company Name</label>
+        <input asp-for="CompanyName" class="form-control" >
+    </div>
+    <div class="form-group">
+        <label asp-for="CompanyAddress">CompanyAddress</label>
+        <input asp-for="CompanyAddress" class="form-control" >
+    </div>
+    <div class="form-group">
+        <label asp-for="Ticker">Ticker</label>
+        <input asp-for="Ticker" class="form-control" >
+    </div>
+
+    <input type="hidden" asp-for="CompanyId" />
+
+    <a asp-controller="Companies" asp-action="Index" class="btn btn-primary">Back</a>
+
+</form>

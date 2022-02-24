@@ -1,0 +1,32 @@
+﻿@model Transaction
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<form asp-controller="Transaction" asp-action="Details" method="Get">
+
+    <div class="form-group">
+        <label asp-for="Quantity">Quantity</label>
+        <input asp-for="Quantity" class="form-control" disabled>
+    </div>
+    <div class="form-group">
+        <label asp-for="SharePrice">Share Price</label>
+        <input asp-for="SharePrice" class="form-control" disabled>
+    </div>
+    <div class="form-group">
+        <label asp-for="Company.CompanyName">Company Name</label>
+        <input asp-for="Company.CompanyName" class="form-control" disabled>
+    </div>
+    <div class="form-group">
+        <label asp-for="TransactionType.Name">Transaction Type</label>
+        <input asp-for="TransactionType.Name" class="form-control" disabled>
+    </div>
+
+    
+    <input type="hidden" asp-for="TransactionId" />
+
+    <a asp-controller="Transactions" asp-action="Index" class="btn btn-primary">Close</a>
+
+</form>

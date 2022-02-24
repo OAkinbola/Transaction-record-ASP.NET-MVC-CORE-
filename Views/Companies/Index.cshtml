@@ -1,0 +1,49 @@
+﻿@model List<Company>
+@{
+    ViewBag.title = "Company List";
+}
+
+<h3>@ViewBag.title</h3>
+
+<br />
+
+<a asp-controller="Company" asp-action="Add">Create New</a>
+
+<br />
+
+@if (TempData["message"] != null)
+{
+    <p class="  alert alert-success alert-dismissible ">@TempData["companyMessage"]</p>
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Company Name</th>
+            <th>CompanyAddress</th>
+            <th>Ticker</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var company in Model)
+        {
+            <tr>
+                <td>@company.CompanyName</td>
+                <td>@company.CompanyAddress</td>
+                <td>@company.Ticker</td>
+                <td>
+                    <a asp-controller="Transactions" asp-action="Record" asp-route-id="@company.CompanyId">Transactions</a> |
+
+                    <a asp-controller="Company" asp-action="Edit" asp-route-id="@company.CompanyId">Edit</a> |
+
+                    <a asp-controller="Company" asp-action="Detail" asp-route-id="@company.CompanyId">Details</a> |
+
+                    <a asp-controller="Company" asp-action="Delete"asp-route-id="@company.CompanyId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+

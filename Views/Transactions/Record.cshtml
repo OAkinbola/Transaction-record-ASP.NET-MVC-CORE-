@@ -1,0 +1,46 @@
+﻿@model List<Transaction>
+@{
+    string title = ViewBag.Name;
+    ViewBag.title = title;
+}
+
+<h2>@ViewBag.Name</h2>
+<h2>@ViewBag.Ticker</h2>
+
+<a asp-controller="Transaction" asp-action="Add">Create New</a>
+<br />
+
+
+@if (ViewBag.Name != "")
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Quantity</th>
+                <th>Share Price</th>
+                <th>Company</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model)
+            {
+                <tr>
+                    <td>@transaction.Quantity</td>
+                    <td>@transaction.SharePrice?.ToString("c2")</td>
+                    <td> <a asp-controller="Companies" asp-action="Index">@transaction.Company.CompanyName</a></td>
+                    <td>@transaction.TransactionType.Name</td>
+                    <td>
+                        <a asp-controller="Transaction" asp-action="Edit" asp-route-id="@transaction.TransactionId">Edit</a> |
+
+                        <a asp-controller="Transaction" asp-action="Details" asp-route-id="@transaction.TransactionId">Details</a> |
+
+                        <a asp-controller="Transaction" asp-action="Delete" asp-route-id="@transaction.TransactionId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+ }
